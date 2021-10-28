@@ -25,16 +25,31 @@ var imageProduct = products._id;
 var nameProduct = products.name;
 var descriptionProduct = products.description;
 
+// Création de chaque class produit
+class cardsProduct {
+    constructor(imageProduct, nameProduct, descriptionProduct) {
+        this.productImageCible = imageProduct;
+        this.productNameCible = nameProduct;
+        this.productDescriptionCible = descriptionProduct;
+    }
+}
+
+//création de chaque cards produit
+var firstCards = new cardsProduct;
+var secondCards = new cardsProduct;
+var thirdCards = new cardsProduct;
+var fourthCards = new cardsProduct;
+var fifthCards = new cardsProduct;
+var sixthCards = new cardsProduct;
+var seventhCards = new cardsProduct;
+var eighthCards = new cardsProduct;
+
 // fonction qui affiche l'image, le nom et la description du produit dans la cible
 function product() {
-    for (productImageCible) {
+    for (firstCards, secondCards, thirdCards, fourthCards, fifthCards, sixthCards, seventhCards, eighthCards) {
         console.log(imageProduct)
-    }
-    for (productNameCible == productImageCible) {
-        console.log(nameProduct)
-    }
-    for (productDescriptionCible == productImageCible) {
-        console.log(descriptionProduct)
+        console.log(nameProduct == imageProduct)
+        console.log(descriptionProduct == imageProduct)
     }
 }
 product();
