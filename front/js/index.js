@@ -26,7 +26,7 @@ var imageProduct = products._id;
 var nameProduct = products.name;
 var descriptionProduct = products.description;
 
-// Création de chaque class produit
+// Création de chaque cards produit
 class cardsProduct {
     constructor(productCards, imageProduct, nameProduct, descriptionProduct) {
         this.productCards = productCards;
@@ -36,19 +36,10 @@ class cardsProduct {
     }
 }
 
-//création de chaque cards produit
-var firstCards = new cardsProduct;
-var secondCards = new cardsProduct;
-var thirdCards = new cardsProduct;
-var fourthCards = new cardsProduct;
-var fifthCards = new cardsProduct;
-var sixthCards = new cardsProduct;
-var seventhCards = new cardsProduct;
-var eighthCards = new cardsProduct;
-
-// fonction qui affiche l'image, le nom et la description du produit dans la cible
+// fonction qui affiche l'image, le nom et la description du produit dans la cible de chaque entrée de produit de l'api
 function product() {
-    for (firstCards, secondCards, thirdCards, fourthCards, fifthCards, sixthCards, seventhCards, eighthCards) {
+    for (products[]) {
+        console.log(productCards)
         console.log(imageProduct)
         console.log(nameProduct == imageProduct)
         console.log(descriptionProduct == imageProduct)
