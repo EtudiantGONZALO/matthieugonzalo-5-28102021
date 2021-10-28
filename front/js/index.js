@@ -16,9 +16,10 @@ fetch("http://")
   });
 
 // Récupérer ou se situe l'image, le nom et la description
-var productImageCible = document.querySelector(#items a > article > img); 
-var productNameCible = document.querySelector(#items a > article > h3);
-var productDescriptionCible = document.querySelector(#items a > article > p);
+var productCards = document.querySelector("items");
+var productImageCible = document.querySelector("items" a > article > img); 
+var productNameCible = document.querySelector("items" a > article > h3);
+var productDescriptionCible = document.querySelector("items" a > article > p);
 
 // Récupérer l'image du produit, le nom du produit et la description du produit dans l'api
 var imageProduct = products._id;
@@ -27,7 +28,8 @@ var descriptionProduct = products.description;
 
 // Création de chaque class produit
 class cardsProduct {
-    constructor(imageProduct, nameProduct, descriptionProduct) {
+    constructor(productCards, imageProduct, nameProduct, descriptionProduct) {
+        this.productCards = productCards;
         this.productImageCible = imageProduct;
         this.productNameCible = nameProduct;
         this.productDescriptionCible = descriptionProduct;
