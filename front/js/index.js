@@ -1,18 +1,22 @@
 // Declaration de la variable et envoi de la réponse de l'api au format JSON
-let kanapdata = [];
-
-const fetchkanap = async () => {
+var kanapfetch = async () => {
   await fetch("http://localhost:3000/api/products")
-    .then((res) => res.json())
-    .then((promise) => {
-      kanapdata = promise;
-      console.log(kanapdata);
-    });
-};
-  
+    .then(function(res) {
+    if (res.ok) {
+      return res.json();
+      }
+    })
+    .then(function(value) {
+      console.log(value);
+    })
+    .catch(function(err) {
+      // Une erreur est survenue
+    })
+}
+
 
 const kanapdisplay = async () => {
-  await kanapdata();
+  await kanapfetch();
   document.getElementById("items").innerHTML = kanapdata.map(kanap)
     `<a href="${kanap._id}">
       <article>
@@ -23,4 +27,4 @@ const kanapdisplay = async () => {
     </a>`;
 }
 
-kanapdisplay();
+kanapdisplay ();
