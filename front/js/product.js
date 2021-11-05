@@ -11,8 +11,8 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         return res.json();
         }
     })
-    .then(function(canapes) {
-        console.log(canapes);
+    .then(function(canape) {
+        console.log(canape);
         //on crée l'image du produit sélectionné
         var div = document.querySelector(".item_img");        
         var img = document.createElement("img");
@@ -28,10 +28,10 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         p.innerText = canape.description;
         //A partir du data on renvoie une boucle pour chaque couleurs
         var select = document.querySelector(".colors");
-        canapes.colors.foreach(canape => {            
+        canape.colors.foreach(canapes => {            
             var option =  document.createElement("option");
-            option.value = canape.colors;
-            option.innerText = canape.colors;
+            option.value = canapes.colors;
+            option.innerText = canapes.colors;
             option.appendChild(select);
         });        
     })
