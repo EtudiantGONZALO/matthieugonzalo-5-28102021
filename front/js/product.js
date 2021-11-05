@@ -27,12 +27,12 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         var p = document.querySelector(".description");
         p.innerText = canape.description;
         //A partir du data on renvoie une boucle pour chaque couleurs
-        var select = document.querySelector(".colors");
+        var selectionColors = document.querySelector(".colors");
         canape.colors.foreach(canapes => {            
             var option =  document.createElement("option");
             option.value = canapes.colors;
             option.innerText = canapes.colors;
-            option.appendChild(select);
+            option.appendChild(selectionColors);
         });        
     })
     .catch(function(err) {
