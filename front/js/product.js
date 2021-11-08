@@ -14,25 +14,25 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
     .then(function(canape) {
         console.log(canape);
         //on crée l'image du produit sélectionné
-        var div = document.querySelector(".item_img");        
+        var div = document.querySelector(".item__img");        
         var img = document.createElement("img");
         img.src = canape.imageUrl;
         img.alt = canape.altTxt;
-        img.appenchild(div);
+        div.appendChild(img);
         //On applique le titre, le prix et la description
-        var h1 = document.querySelector(".title");
+        var h1 = document.querySelector("#title");
         h1.innerText = canape.name;
-        var span = document.querySelector(".price");
+        var span = document.querySelector("#price");
         span.innerText = canape.price;
-        var p = document.querySelector(".description");
+        var p = document.querySelector("#description");
         p.innerText = canape.description;
         //A partir du data on renvoie une boucle pour chaque couleurs
-        var selectionColors = document.querySelector(".colors");
-        canape.colors.foreach(canapes => {            
-            var option =  document.createElement("option");
-            option.value = canapes.colors;
-            option.innerText = canapes.colors;
-            option.appendChild(selectionColors);
+        var selectionColors = document.querySelector("#colors");
+        canape.colors.forEach(canapcolor => {            
+            var options =  document.createElement("option");
+            options.value = canapcolor.colors;
+            options.innerText = canapcolor.colors;
+            selectionColors.appendChild(options);
         });        
     })
     .catch(function(err) {
