@@ -41,7 +41,7 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         buttonA.appendChild(button);
         //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
         localStorage.canapcolor = canapcolor;
-        localStorage._id = canape._id;
+        localStorage.id = canape._id;
         var nombre = document.querySelector("#quantity");
         localStorage.quantite = nombre.innerText;
     })
