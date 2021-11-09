@@ -28,12 +28,22 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         p.innerText = canape.description;
         //A partir du data on renvoie une boucle pour chaque couleurs
         var selectionColors = document.querySelector("#colors");
-        canape.colors.forEach(canapcolor => {            
+        canape.colors.forEach(canapcolor => {          
             var options =  document.createElement("option");
             options.value = canapcolor.colors;
-            options.innerText = canapcolor.colors;
+            options.innerText = canapcolor.colors; 
             selectionColors.appendChild(options);
-        });        
+        });
+        //Faire du <button> un lien vers la page panier transmettant aussi l'id 
+        var button = document.querySelector("#addToCart");
+        var buttonA = document.createElement("a");
+        buttonA.href = '../html/cart.html' + '?id=' + canape._id;
+        buttonA.appendChild(button);
+        //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
+        localStorage.canapcolor = canapcolor;
+        localStorage._id = canape._id;
+        var nombre = document.querySelector("#quantity");
+        localStorage.quantite = nombre.innerText;
     })
     .catch(function(err) {
         // Une erreur est survenue
