@@ -1,11 +1,5 @@
-//récupération dans une variable l'id passé en parametre de l'url
-const queryString_url_id = window.location.search;
-
-const leId = queryString_url_id.slice(4);
-console.log(leId);
-
-// appeler l'api avec la route /get 1 canape
-fetch("http://localhost:3000/api/products" + "/" + leId)
+// appeler l'api pour récupérer l'id passé en parametre du local storage
+fetch("http://localhost:3000/api/products" + "/" + localStorage.id)
     .then(function(res) {
         if (res.ok) {
         return res.json();
