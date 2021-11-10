@@ -1,5 +1,6 @@
-// appeler l'api pour récupérer l'id passé en parametre du local storage
-fetch("http://localhost:3000/api/products" + "/" + localStorage.id)
+
+// appeler l'api avec la route /get 1 canape
+fetch("http://localhost:3000/api/products")
     .then(function(res) {
         if (res.ok) {
         return res.json();
@@ -7,23 +8,38 @@ fetch("http://localhost:3000/api/products" + "/" + localStorage.id)
     })
     .then(function(canape) {
         console.log(canape);
-        var div = document.querySelector(".cart__item__img");
-        var img = document.createElement("img");
-        img.src = canape.imageUrl;
-        img.alt = canape.altTxt;
-        div.appendChild(img);
-        var divH2P = document.querySelector(".cart__item__content__titlePrice");
-        var h2 = document.createElement("h2");
-        h2.innerText = canape.name;
-        var p = document.createElement("p");
-        p.innerText = canape.price;
-        divH2P.appendChild("h2");
-        divH2P.appendChild("p");
-        var divPInput = document.querySelector("cart__item__content__settings__quantity");
-        var pQuantity = document.createElement("p");
-        pQuantity.innerText = "Qté : ";
-        divPInput.appendChild(pQuantity);
+
+        //Appel du localStorage
+        localStorage["canapcolor", "id", "quantite"];
+        
+        //Création de la présentation du produit dans le panier
+        var section = document.querySelector("#cart__items");
+        section.innerHTML = '<article class="cart__item" data-id="localStorage.id">';
+        section.innerHTML += '<div class="cart__item__img">';
+        section.innerHTML += '<img src="canape.imageUrl" alt="canape.altTxt">';
+        section.innerHTML += '</div>';
+        section.innerHTML += '<div class="cart__item__content">';
+        section.innerHTML += '<div class="cart__item__content__titlePrice">';
+        section.innerHTML += '<h2>canape.name</h2>';
+        section.innerHTML += '<p>canape.price</p>';
+        section.innerHTML += '</div>';
+        section.innerHTML += '<div class="cart__item__content__settings">';
+        section.innerHTML += '<div class="cart__item__content__settings__quantity">';
+        section.innerHTML += '<p>Qté : </p>';
+        section.innerHTML += '<input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="canape.price">';
+        section.innerHTML += '</div>';
+        section.innerHTML += '<div class="cart__item__content__settings__delete">';
+        section.innerHTML += '<p class="deleteItem">Supprimer</p>';
+        section.innerHTML += '</div>';
+        section.innerHTML += '</div>';
+        section.innerHTML += '</div>';
+        section.innerHTML += '</article>';
+        var totalquantite = document.querySelector("#totalQuantity");
+        totalquantite.innerText = localStorage.quantite;
+        var total = document.querySelector("totalPrice");
+        total.innerText = localStorage.quantite * canape.price;
     })
+    
     .catch(function(err) {
-        // Une erreur est survenue
+    // Une erreur est survenue
       });
