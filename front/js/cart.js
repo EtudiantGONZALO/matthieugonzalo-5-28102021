@@ -1,6 +1,6 @@
 
 // appeler l'api avec la route /get 1 canape
-fetch("http://localhost:3000/api/products")
+fetch("http://localhost:3000/api/products" + "/" + localStorage.id)
     .then(function(res) {
         if (res.ok) {
         return res.json();

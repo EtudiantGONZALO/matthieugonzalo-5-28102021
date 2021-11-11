@@ -34,7 +34,6 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
             options.innerText = canapcolor.colors; 
             selectionColors.appendChild(options);
         });
-        
         //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
         localStorage.canapcolor = options.innerTxt;
         localStorage.id = canape._id;
