@@ -34,6 +34,13 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
             options.innerText = canapcolor.colors; 
             selectionColors.appendChild(options);
         });
+        //On met une balise <a> au button
+        var button = document.querySelector(".item__content__addButton");
+        var buttonA = document.createElement("a");
+        buttonA.href = './cart.html' + '?id=' + canape._id;
+        button.appendChild(buttonA);
+        var buttonPrincipal = document.querySelector("#addToCart");
+        buttonA.appendChild(buttonPrincipal);
         //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
         localStorage.canapcolor = options.innerTxt;
         localStorage.id = canape._id;
