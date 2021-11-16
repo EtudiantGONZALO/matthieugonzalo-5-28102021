@@ -22,8 +22,10 @@ fetch("http://localhost:3000/api/products")
       img.src = canape.imageUrl;
       img.alt = canape.altTxt;
       var h3 = document.createElement("h3");
+      h3.classList.add("productName");
       h3.innerText = canape.name;
       var p = document.createElement("p");
+      p.classList.add("productDescription");
       p.innerText = canape.description;
       //On apparente chaque balise a son element parent
       article.appendChild(img);

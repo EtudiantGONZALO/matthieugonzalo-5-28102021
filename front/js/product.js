@@ -28,10 +28,11 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         p.innerText = canape.description;
         //A partir du data on renvoie une boucle pour chaque couleurs
         var selectionColors = document.querySelector("#colors");
-        canape.colors.forEach(canapcolor => {          
+        canape.colors.forEach(canapcolor => { 
+            console.log(canapcolor);         
             var options =  document.createElement("option");
-            options.value = canapcolor.colors;
-            options.innerText = canapcolor.colors; 
+            options.value = canapcolor;
+            options.innerText = canapcolor; 
             selectionColors.appendChild(options);
         });
         //On met une balise <a> au button
@@ -41,13 +42,28 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         button.appendChild(buttonA);
         var buttonPrincipal = document.querySelector("#addToCart");
         buttonA.appendChild(buttonPrincipal);
-        //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
-        localStorage.canapcolor = options.innerTxt;
-        localStorage.id = canape._id;
-        var nombre = document.querySelector("#quantity");
-        localStorage.quantite = nombre.innerText;
-        localStorage["canapcolor", "id", "quantite"] = button.focus;
+        buttonA.onclick = function() {
+            ajouterPanier(nameLS, alt, price, img, id, quantite, couleur);
+        };
     })
     .catch(function(err) {
         // Une erreur est survenue
     });
+
+    var input =  document.querySelector("#quantity");
+        input.setAttribute("value", input.innerText);
+    
+    function ajouterPanier(nameLS, alt, price, img, id, quantite, couleur) {
+        //on récupère l'objet monPanier : si il n'existe pas, je le crée, si il existe , je le modifie
+        //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
+        const monPanier = {
+            nameLS: canape.name,
+            alt: canape.altTxt,
+            price: canape.price,
+            img: canape.Url,
+            id: canape._id,
+            quantite: document.querySelector("#quantity").getAttribute("value"),
+            color: document.querySelector("#colors").getAttribute("value")
+        };
+        localStorage.setItem("monPanier", JSON.stringify(monPanier));        
+    };
