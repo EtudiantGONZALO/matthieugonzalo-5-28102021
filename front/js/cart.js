@@ -41,24 +41,27 @@ fetch("http://localhost:3000/api/products" + "/" + localStorage.getItem("id"))
         var pQuantite = document.createElement("p");
         pQuantite.innerText = "Qté :";
         divQuantiteInput.appendChild(pQuantite);
-        //var input = document.createElement("input");
-        //input.setAttribute("type", Number);
-        //input.classList.add("itemQuantity");
-        //input.setAttribute("name", itemQuantity);
-        //input.setAttribute("min", 1);
-        //input.setAttribute("max", 100);
-        //input.setAttribute("value", localStorage.getItem("quantite"));
-        //divQuantiteInput.appendChild(input);
+        var input = document.createElement("input");
+        input.setAttribute("type", Number);
+        input.classList.add("itemQuantity");
+        input.name = "itemQuantity";
+        input.setAttribute("min", 1);
+        input.setAttribute("max", 100);
+        input.setAttribute("value", localStorage.getItem("quantite"));
+        divQuantiteInput.appendChild(input);
+        var divSupprimer = document.createElement("div");
+        divSupprimer.classList.add("cart__item__content__settings__delete")
+        divQuantite.appendChild(divSupprimer);
+        var pSupprimer = document.createElement("p");
+        pSupprimer.classList.add("deleteItem");
+        pSupprimer.innerText = "Supprimer";
+        divSupprimer.appendChild(pSupprimer);
         var spanQuantite = document.querySelector("#totalQuantity");
         spanQuantite.innerText = localStorage.getItem("quantite");
         var spanPrice = document.querySelector("#totalPrice");
         spanPrice.innerText = canape.price * localStorage.getItem("quantite");
         localStorage.setItem("spanPrice", spanPrice.innerText);
-        //if (spanPrice = 0, spanPrice < 100, spanPrice++) {
-        //    spanPrice = spanPrice + spanPrice++;
-        //}  
-        //});
-    })
-    .catch(function(err) {
-        // Une erreur est survenue
-      });    
+        })
+.catch(function(err) {
+  // Une erreur est survenue
+});    
