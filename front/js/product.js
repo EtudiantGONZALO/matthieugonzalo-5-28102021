@@ -36,34 +36,14 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
             selectionColors.appendChild(options);
         });
         //On met une balise <a> au button
-        var button = document.querySelector(".item__content__addButton");
-        var buttonA = document.createElement("a");
-        buttonA.href = './cart.html' + '?id=' + canape._id;
-        button.appendChild(buttonA);
         var buttonPrincipal = document.querySelector("#addToCart");
-        buttonA.appendChild(buttonPrincipal);
-        buttonA.onclick = function() {
-            ajouterPanier(nameLS, alt, price, img, id, quantite, couleur);
+        buttonPrincipal.onclick = function() {
+            localStorage.setItem("id", canape._id);
+            localStorage.setItem("colors", colors.value);
+            localStorage.setItem("quantite", quantity.value);
         };
     })
     .catch(function(err) {
         // Une erreur est survenue
     });
-
-    var input =  document.querySelector("#quantity");
-        input.setAttribute("value", input.innerText);
     
-    function ajouterPanier(nameLS, alt, price, img, id, quantite, couleur) {
-        //on récupère l'objet monPanier : si il n'existe pas, je le crée, si il existe , je le modifie
-        //On incrémente le button de l'id, la quantité et la couleur dans le Localstorage
-        const monPanier = {
-            nameLS: canape.name,
-            alt: canape.altTxt,
-            price: canape.price,
-            img: canape.Url,
-            id: canape._id,
-            quantite: document.querySelector("#quantity").getAttribute("value"),
-            color: document.querySelector("#colors").getAttribute("value")
-        };
-        localStorage.setItem("monPanier", JSON.stringify(monPanier));        
-    };
