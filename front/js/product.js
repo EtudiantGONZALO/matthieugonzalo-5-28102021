@@ -4,7 +4,7 @@ const queryString_url_id = window.location.search;
 const leId = queryString_url_id.slice(4);
 console.log(leId);
 
-// appeler l'api avec la route /get 1 canape
+// appeler l'api avec la route /get 1 canape de l'api
 fetch("http://localhost:3000/api/products" + "/" + leId)
     .then(function(res) {
         if (res.ok) {
@@ -35,12 +35,21 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
             options.innerText = canapcolor; 
             selectionColors.appendChild(options);
         });
-        //On met une balise <a> au button
+        //On met le localStorage au button
         var buttonPrincipal = document.querySelector("#addToCart");
         buttonPrincipal.onclick = function() {
-            localStorage.setItem("id", canape._id);
-            localStorage.setItem("colors", colors.value);
-            localStorage.setItem("quantite", quantity.value);
+            var canapeObj = {
+                id: canape._id,
+                color: colors.value,
+                quantite: quantity.value,
+            }
+            var panier = JSON.parse(localStorage.getItem("canapes"));
+            if (panier == null) {
+                localStorage.setItem("canapes", JSON.stringify([canapeObj]));
+            } else {
+                panier.push(canapeObj); 
+                localStorage.setItem("canapes", JSON.stringify(panier));               
+            }
         };
     })
     .catch(function(err) {
