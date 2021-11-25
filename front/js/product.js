@@ -42,11 +42,15 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
                 id: canape._id,
                 color: colors.value,
                 quantite: quantity.value,
+                price: canape.price * quantity.value,
             }
             var panier = JSON.parse(localStorage.getItem("canapes"));
             if (panier == null) {
                 localStorage.setItem("canapes", JSON.stringify([canapeObj]));
-            } else {
+            } //else if (var idemId = canapes.id === Number && var idemColor = canapes.color === "string") {
+                //canapes.quantite = canapes.quantite.indexOf(idemColor) + canapes.quantite.length;
+                //localStorage.setItem("canapes.quantite");}
+                else {
                 panier.push(canapeObj); 
                 localStorage.setItem("canapes", JSON.stringify(panier));               
             }
