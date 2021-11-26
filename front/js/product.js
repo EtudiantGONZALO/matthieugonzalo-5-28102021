@@ -47,9 +47,9 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
             var panier = JSON.parse(localStorage.getItem("canapes"));
             if (panier == null) {
                 localStorage.setItem("canapes", JSON.stringify([canapeObj]));
-            } //else if (var idemId = canapes.id === Number && var idemColor = canapes.color === "string") {
-                //canapes.quantite = canapes.quantite.indexOf(idemColor) + canapes.quantite.length;
-                //localStorage.setItem("canapes.quantite");}
+            } /*else if ( var idemId = panier.id === "string" && var idemColor = panier.color === "string") {
+                canapes.quantite = canapes.quantite.indexOf() + canapes.quantite.length;
+                idemId.push("canapes.quantite");}*/
                 else {
                 panier.push(canapeObj); 
                 localStorage.setItem("canapes", JSON.stringify(panier));               
