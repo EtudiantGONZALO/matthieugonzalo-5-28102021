@@ -51,7 +51,7 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
                     var leCanapeExiste = false;
                     panier.forEach((canap) => {
                         if (canap.id === canapeObj.id && canap.color === canapeObj.color) {
-                            canapeObj.quantite += canap.quantite;
+                            canap.quantite += canapeObj.quantite;
                             leCanapeExiste = true;                                                       
                         }
                     });
