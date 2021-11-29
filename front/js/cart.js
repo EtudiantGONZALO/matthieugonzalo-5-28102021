@@ -58,24 +58,11 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
         pSupprimer.classList.add("deleteItem");
         pSupprimer.innerText = "Supprimer";
         divSupprimer.appendChild(pSupprimer);
-
-        
-        var myTotalQuantite = [canapeLocal.quantite];
-        console.log(myTotalQuantite);
-        for ( var i of myTotalQuantite ) {
-          var spanQuantite = document.querySelector("#totalQuantity");
-          spanQuantite.innerText += myTotalQuantite;
-        }
-          
-        var myTotalPrice = [canapeLocal.price];
-        console.log(myTotalPrice);
-        for ( var o of myTotalPrice ) {
-          var spanPrice = document.querySelector("#totalPrice");
-          spanPrice.innerText += myTotalPrice;
-        }
-          
-        
-        })
+        var spanQuantite = document.querySelector("#totalQuantity");
+        spanQuantite.innerText = Number(canapeLocal.quantite) + Number(spanQuantite.innerText);
+        var spanPrice = document.querySelector("#totalPrice");
+        spanPrice.innerText = Number(canapeLocal.price) + Number(spanPrice.innerText);
+  })
   .catch(function(err) {
   // Une erreur est survenue
   });
