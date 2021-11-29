@@ -47,15 +47,22 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
             var panier = JSON.parse(localStorage.getItem("canapes"));
             if (panier == null) {
                 localStorage.setItem("canapes", JSON.stringify([canapeObj]));
-            } /*else if ( var idemId = canapes.id === "string" && var idemColor = canapes.color === "string") {
-                canapes.quantite = canapes.quantite.indexOf() + canapes.quantite.length;
-                idemId.push("canapes.quantite");}*/
-                else {
-                panier.push(canapeObj); 
-                localStorage.setItem("canapes", JSON.stringify(panier));               
+            } else {
+                    var leCanapeExiste = false;
+                    panier.forEach((canap) => {
+                        if (canap.id === canapeObj.id && canap.color === canapeObj.color) {
+                            canapeObj.quantite += canap.quantite;
+                            leCanapeExiste = true;                                                       
+                        }
+                    });
+                    if (leCanapeExiste === false) {
+                        panier.push(canapeObj); 
+                        localStorage.setItem("canapes", JSON.stringify(panier));               
+                    }
+                    
+                }
             }
-        };
-    })
+        })
     .catch(function(err) {
         // Une erreur est survenue
     });
