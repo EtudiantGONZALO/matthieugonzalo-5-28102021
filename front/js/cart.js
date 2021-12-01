@@ -62,9 +62,18 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
         spanQuantite.innerText = Number(canapeLocal.quantite) + Number(spanQuantite.innerText);
         var spanPrice = document.querySelector("#totalPrice");
         spanPrice.innerText = Number(canapeLocal.price) + Number(spanPrice.innerText);
+
+        /*var inputChange = document.querySelectorAll(".itemQuantity");
+        var spanQuantiteChange = document.querySelector("#totalQuantity");
+        inputChange.addEventListener('change', function () {
+          inputChange.innerText = inputChange.dataset.value;
+          spanQuantiteChange.innerText = this.value + Number(canapeLocal.quantite) + Number(spanQuantiteChange.innerText);
+          var dataId = spanQuantiteChange.closest("article").data-id;
+        });*/
+        
+        
   })
   .catch(function(err) {
   // Une erreur est survenue
   });
 });
-
