@@ -1,16 +1,18 @@
 var panier = JSON.parse(localStorage.getItem("canapes"));
 console.log(panier);
 panier.forEach(canapeLocal => {
-fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
-.then(function(res) {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-.then(function(canapeApi) {
-    console.log(canapeApi);
+  fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
+  .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+  .then(function(canapeApi) {
+      console.log(canapeApi);
         //Création de la présentation du produit dans le panier
         var section = document.querySelector("#cart__items");
+
+        //On crée l'image
         var article = document.createElement("article");
         article.classList.add("cart__item");
         article.setAttribute("data-id", canapeLocal.id);
@@ -22,6 +24,8 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
         img.src = canapeApi.imageUrl;
         img.alt = canapeApi.altTxt;
         divimg.appendChild(img);
+        
+        //On crée le nom et le prix
         var cart = document.createElement("div");
         cart.classList.add("cart__item__content");
         article.appendChild(cart);
@@ -34,6 +38,8 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
         var pPrice = document.createElement("p");
         pPrice.innerText = canapeApi.price + " €";
         cartTitlePrice.appendChild(pPrice);
+        
+        //On crée l'input quantité
         var divQuantite = document.createElement("div");
         divQuantite.classList.add("cart__item__content__settings");
         cart.appendChild(divQuantite);
@@ -44,13 +50,15 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
         pQuantite.innerText = "Qté :";
         divQuantiteInput.appendChild(pQuantite);
         var input = document.createElement("input");
-        input.setAttribute("type", Number);
+        input.type = 'number';
         input.classList.add("itemQuantity");
         input.name = "itemQuantity";
         input.setAttribute("min", 1);
         input.setAttribute("max", 100);
         input.setAttribute("value", canapeLocal.quantite);
         divQuantiteInput.appendChild(input);
+        
+        //On crée le bouton supprimer
         var divSupprimer = document.createElement("div");
         divSupprimer.classList.add("cart__item__content__settings__delete")
         divQuantite.appendChild(divSupprimer);
@@ -58,31 +66,35 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
         pSupprimer.classList.add("deleteItem");
         pSupprimer.innerText = "Supprimer";
         divSupprimer.appendChild(pSupprimer);
-        /*var spanQuantite = document.querySelector("#totalQuantity");
+        
+        //On met à jour la quantité total et le prix total des canapés
+        var spanQuantite = document.querySelector("#totalQuantity");
         spanQuantite.innerText = Number(canapeLocal.quantite) + Number(spanQuantite.innerText);
         var spanPrice = document.querySelector("#totalPrice");
-        spanPrice.innerText = Number(canapeLocal.price) + Number(spanPrice.innerText);*/
+        spanPrice.innerText = Number(canapeLocal.price) + Number(spanPrice.innerText);
 
-        var inputChange = document.querySelectorAll(".itemQuantity");
-        if (inputChange.innerText === canapeLocal.quantite) {
-          var spanQuantite = document.querySelector("#totalQuantity");
-          spanQuantite.innerText = Number(canapeLocal.quantite) + Number(spanQuantite.innerText);
-          var spanPrice = document.querySelector("#totalPrice");
-          spanPrice.innerText = Number(canapeLocal.price) + Number(spanPrice.innerText);
-        } else {
-          inputChange.innerText.addEventListener('change', function () {
-          localStorage.setItem("canapeLocal.quantite", "inputChange.innerText");
-          });
-        }
-
-        var buttonSupprimer = document.querySelector(".deleteItem");
-        buttonSupprimer.onclick = function () {
-          localStorage.removeItem('canapeLocal');
-          //var articleSupprimer = document.querySelector(".cart__item");
-          //articleSupprimer.remeoveAttribute("data-id");
-        }
+        //On crée une fonction pour changer la quantité
+        input.addEventListener('change', function() {
+          //nouveau tableau dans le localStorage 
+          canapeLocal.quantite = Number(input.value);
+          canapeLocal.price = canapeApi.price * canapeLocal.quantite;
+          localStorage.setItem("canapes", JSON.stringify(panier));
+        });
+        
+        //On crée une fonction pour supprimer le canapé
+        /*pSupprimer.addEventListener('change', function() {
+          var deleteId = canapeLocal.id;
+          var deleteColor = canapeLocal.color;
+          panier = canapeLocal.filter(elt => elt.id !== deleteId || elt.color !== deleteColor);
+          localStorage.setItem("canapes", JSON.stringify(panier));
+        });*/
+          //parcour le panier (localstorage), tu essaies de trouver a quel canapé correspond celui que tu veux supprimer
+          //une fois que tu l'as, tu le supprimes = tu supprimes la ligne du tableau > google : "js comment ..." 
+          //recharger la page
   })
   .catch(function(err) {
   // Une erreur est survenue
   });
 });
+
+
