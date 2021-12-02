@@ -74,6 +74,12 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
           localStorage.setItem("canapeLocal.quantite", "inputChange.innerText");
           });
         }
+
+        var buttonSupprimer = document.querySelector(".deleteItem");
+        buttonSupprimer.onclick = function () {
+          var articleSupprimer = document.querySelector(".cart__item");
+          articleSupprimer.removeAttribute('data-id');
+        }
           
           //var dataId = spanQuantiteChange.closest("article").data-id;
         //});
