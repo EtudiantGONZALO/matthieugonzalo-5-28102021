@@ -77,14 +77,10 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
 
         var buttonSupprimer = document.querySelector(".deleteItem");
         buttonSupprimer.onclick = function () {
-          var articleSupprimer = document.querySelector(".cart__item");
-          articleSupprimer.removeAttribute('data-id');
+          localStorage.removeItem('canapeLocal');
+          //var articleSupprimer = document.querySelector(".cart__item");
+          //articleSupprimer.remeoveAttribute("data-id");
         }
-          
-          //var dataId = spanQuantiteChange.closest("article").data-id;
-        //});
-        
-        
   })
   .catch(function(err) {
   // Une erreur est survenue
