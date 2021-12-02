@@ -71,7 +71,7 @@ fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
           spanPrice.innerText = Number(canapeLocal.price) + Number(spanPrice.innerText);
         } else {
           inputChange.innerText.addEventListener('change', function () {
-          inputChange.innerText = canapeLocal.quantite;
+          localStorage.setItem("canapeLocal.quantite", "inputChange.innerText");
           });
         }
           
