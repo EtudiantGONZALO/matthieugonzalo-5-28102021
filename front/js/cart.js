@@ -66,7 +66,7 @@ panier.forEach(canapeLocal => {
         pSupprimer.classList.add("deleteItem");
         pSupprimer.innerText = "Supprimer";
         divSupprimer.appendChild(pSupprimer);
-        
+
         //On met à jour la quantité total et le prix total des canapés
         var spanQuantite = document.querySelector("#totalQuantity");
         spanQuantite.innerText = Number(canapeLocal.quantite) + Number(spanQuantite.innerText);
@@ -77,16 +77,27 @@ panier.forEach(canapeLocal => {
         input.addEventListener('change', function() {
           //nouveau tableau dans le localStorage 
           canapeLocal.quantite = Number(input.value);
-          canapeLocal.price = canapeApi.price * canapeLocal.quantite;
+          canapeLocal.price = Number(canapeApi.price) * Number(canapeLocal.quantite);
           localStorage.setItem("canapes", JSON.stringify(panier));
+          window.location.href = "cart.html";
         });
-        
-        //On crée une fonction pour supprimer le canapé
-        /*pSupprimer.addEventListener('change', function() {
+                
+        //On crée une fonction pour supprimer le canapé 
+        pSupprimer.addEventListener("click", function() {
           var deleteId = canapeLocal.id;
+          console.log(deleteId);
           var deleteColor = canapeLocal.color;
-          panier = canapeLocal.filter(elt => elt.id !== deleteId || elt.color !== deleteColor);
+          panier = panier.filter( elt => elt.id !== deleteId && elt.color !== deleteColor);
           localStorage.setItem("canapes", JSON.stringify(panier));
+          window.location.href = "cart.html";
+          });
+          
+        
+        /*pSupprimer.addEventListener('change', function() {
+          canapeApi === 0;
+          canapeLocal === 0;
+          localStorage.setItem("canapes", JSON.stringify(panier));
+          pSupprimer.addEventListener('click', location.reload(), false);
         });*/
           //parcour le panier (localstorage), tu essaies de trouver a quel canapé correspond celui que tu veux supprimer
           //une fois que tu l'as, tu le supprimes = tu supprimes la ligne du tableau > google : "js comment ..." 
