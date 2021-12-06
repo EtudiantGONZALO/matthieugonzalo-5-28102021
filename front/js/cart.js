@@ -87,21 +87,46 @@ panier.forEach(canapeLocal => {
           var deleteId = canapeLocal.id;
           console.log(deleteId);
           var deleteColor = canapeLocal.color;
-          panier = panier.filter( elt => elt.id !== deleteId && elt.color !== deleteColor);
+          panier = panier.filter( elt => elt.id !== deleteId || elt.color !== deleteColor);
           localStorage.setItem("canapes", JSON.stringify(panier));
           window.location.href = "cart.html";
-          });
-          
+        });
+
+        //******************** Vérification du formulaire*************************/
+
+        //On vérifie le prénom
+        var masqueChiffreCaractere = /^[0123456789_!¡?÷?¿+=@#%&*(){}~<>;:[\]]/g;
+        var inputFirstName = document.querySelector("#firstName");
+        var pErrorFirstNameMsg = document.querySelector("#firstNameErrorMsg");
+        var resultatFirstName = masqueChiffreCaractere.test(inputFirstName.value);
+          pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir les caractères : " + resultatFirstName[0];
         
-        /*pSupprimer.addEventListener('change', function() {
-          canapeApi === 0;
-          canapeLocal === 0;
-          localStorage.setItem("canapes", JSON.stringify(panier));
-          pSupprimer.addEventListener('click', location.reload(), false);
-        });*/
-          //parcour le panier (localstorage), tu essaies de trouver a quel canapé correspond celui que tu veux supprimer
-          //une fois que tu l'as, tu le supprimes = tu supprimes la ligne du tableau > google : "js comment ..." 
-          //recharger la page
+
+      //On vérifie le Nom
+        var inputLastName = document.querySelector("#lastName");
+        var pErrorLastNameMsg = document.querySelector("#lastNameErrorMsg");
+        if (masqueChiffreCaractere.test(inputLastName.value)) {
+          pErrorLastNameMsg.innerText = "Votre Nom ne doit contenir que des lettres.";
+        }
+
+      //On vérifie l'adresse
+        var masqueCaractere = /[&~"#{[()\]}`_@°=+£¤%*µ,?;/:§!]/g;
+        var inputAddress = document.querySelector("#address");
+        var pErrorAddressMsg = document.querySelector("#addressErrorMsg");
+        if (masqueCaractere.exec(inputAddress.value)) {
+          pErrorAddressMsg.innerText = "Votre adresse ne doit contenir aucun caratères spéciaux."
+        }
+
+      //On vérifie la ville
+        var inputCity = document.querySelector("#city");
+        var pErrorCityMsg = document.querySelector("#cityErrorMsg");
+        if (masqueChiffreCaractere.exec(inputCity.value)) {
+          pErrorCityMsg.innerText = "La ville ne doit contenir que des lettres";
+        }
+
+      //On vérifie l'email
+
+        
   })
   .catch(function(err) {
   // Une erreur est survenue
