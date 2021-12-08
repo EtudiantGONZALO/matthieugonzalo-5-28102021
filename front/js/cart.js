@@ -105,7 +105,7 @@ panier.forEach(canapeLocal => {
 
         //On enregistre les données du formulaire
         var btnformulaire = document.querySelector('.cart__order__form');
-        function checkValidity() {
+        btnformulaire.onclick = function() {
           var contactObj = {
             firstName : document.querySelector('#firstName').value,
             lastName : document.querySelector('#lastName').value,
@@ -115,30 +115,35 @@ panier.forEach(canapeLocal => {
           }
           var formulaire = JSON.parse(localStorage.getItem("contact")[2]);
 
-          if (formulaire == true) {
-            localStorage.setItem("contact", JSON.stringify(formulaire));
-            
-            } else {
-              //On vérifie le prénom
-            var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
-            var pErrorFirstNameMsg = document.querySelector("#firstNameErrorMsg");
-            var validFirstName = masqueChiffreCaractere.exec(contactObj.firstName);
-            pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
+            if (formulaire == null) {
+              var pErrorFirstNameMsg = document.querySelector("#firstNameErrorMsg");
+              var pErrorLastNameMsg = document.querySelector("#lastNameErrorMsg");
+              var pErrorAddressMsg = document.querySelector("#addressErrorMsg");
+              var pErrorCityMsg = document.querySelector("#cityErrorMsg");
 
-            //On vérifie le Nom
-            var pErrorLastNameMsg = document.querySelector("#lastNameErrorMsg");
-            var validLastName = masqueChiffreCaractere.exec(contactObj.lastName);
-            pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
+              pErrorFirstNameMsg.innerText = "Veuillez remplir le champ";
+              pErrorLastNameMsg.innerText = "Veuillez remplir le champ";
+              pErrorAddressMsg.innerText = "Veuillez remplir le champ";
+              pErrorCityMsg.innerText = "veuillez remplir le champ";
 
-            //On vérifie l'adresse
-            var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
-            var pErrorAddressMsg = document.querySelector("#addressErrorMsg");
-            var validAddress = masqueCaractere.exec(contactObj.address);
-            pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
+              } else {
+                  //On vérifie le prénom
+                  var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
+                  var validFirstName = masqueChiffreCaractere.exec(contactObj.firstName);
+                  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
 
-            //On vérifie la ville
-            var pErrorCityMsg = document.querySelector("#cityErrorMsg");
-            var validCity = masqueChiffreCaractere.exec(contactObj.city);
-            pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
-              }
-          }
+                  //On vérifie le Nom
+                  var validLastName = masqueChiffreCaractere.exec(contactObj.lastName);
+                  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
+
+                  //On vérifie l'adresse
+                  var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
+                  var validAddress = masqueCaractere.exec(contactObj.address);
+                  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
+
+                  //On vérifie la ville
+                  var validCity = masqueChiffreCaractere.exec(contactObj.city);
+                  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
+                  }
+          localStorage.setItem("contact", JSON.stringify(formulaire));
+        }
