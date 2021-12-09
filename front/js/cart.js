@@ -104,7 +104,6 @@ panier.forEach(canapeLocal => {
 
 //On enregistre les données du formulaire
 var btnformulaire = document.querySelector("#order");
-console.log(btnformulaire);
 btnformulaire.onclick = function() {
   var firstName = document.querySelector('#firstName').value;
   var lastName = document.querySelector('#lastName').value;
@@ -113,30 +112,30 @@ btnformulaire.onclick = function() {
 
   //On vérifie le prénom
   var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
-  var validFirstName = masqueChiffreCaractere.test(firstName);
+  var validFirstName = masqueChiffreCaractere.exec(firstName);
 
   //si "FirstName" contient une erreur, on affiche le message, sinon, non
   if (firstName.indexOf(validFirstName) >= 0) {
-  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName;
+  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
   }
 
   //On vérifie le Nom
-  var validLastName = masqueChiffreCaractere.test(lastName);
+  var validLastName = masqueChiffreCaractere.exec(lastName);
   if (lastName.indexOf(validLastName) >= 0) {
-  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName;
+  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
   }
 
   //On vérifie l'adresse
   var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
-  var validAddress = masqueCaractere.test(address);
+  var validAddress = masqueCaractere.exec(address);
   if (address.indexOf(validAddress) >= 0) {
-  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress;
+  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
   }
 
   //On vérifie la ville
-  var validCity = masqueChiffreCaractere.test(city);
+  var validCity = masqueChiffreCaractere.exec(city);
   if (city.indexOf(validCity) >= 0) {
-  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity;
+  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
   }
             
   var contactObj = {
