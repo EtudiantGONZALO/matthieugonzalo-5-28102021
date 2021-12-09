@@ -113,30 +113,30 @@ btnformulaire.onclick = function() {
 
   //On vérifie le prénom
   var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
-  var validFirstName = masqueChiffreCaractere.exec(firstName);
-  
+  var validFirstName = masqueChiffreCaractere.test(firstName);
+
   //si "FirstName" contient une erreur, on affiche le message, sinon, non
-  if (firstName.indexOf(validFirstName)) {
-  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
+  if (firstName.indexOf(validFirstName) >= 0) {
+  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName;
   }
 
   //On vérifie le Nom
-  var validLastName = masqueChiffreCaractere.exec(lastName);
+  var validLastName = masqueChiffreCaractere.test(lastName);
   if (lastName.indexOf(validLastName) >= 0) {
-  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
+  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName;
   }
 
   //On vérifie l'adresse
   var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
-  var validAddress = masqueCaractere.exec(address);
+  var validAddress = masqueCaractere.test(address);
   if (address.indexOf(validAddress) >= 0) {
-  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
+  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress;
   }
 
   //On vérifie la ville
-  var validCity = masqueChiffreCaractere.exec(city);
+  var validCity = masqueChiffreCaractere.test(city);
   if (city.indexOf(validCity) >= 0) {
-  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
+  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity;
   }
             
   var contactObj = {
@@ -146,3 +146,5 @@ btnformulaire.onclick = function() {
     city
   }
 }
+
+//faire une methode post
