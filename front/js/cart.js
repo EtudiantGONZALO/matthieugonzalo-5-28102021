@@ -85,7 +85,6 @@ panier.forEach(canapeLocal => {
         //On crée une fonction pour supprimer le canapé 
         pSupprimer.addEventListener("click", function() {
           var deleteId = canapeLocal.id;
-          console.log(deleteId);
           var deleteColor = canapeLocal.color;
           panier = panier.filter( elt => elt.id !== deleteId || elt.color !== deleteColor);
           localStorage.setItem("canapes", JSON.stringify(panier));
@@ -103,47 +102,47 @@ panier.forEach(canapeLocal => {
 
 //******************** Vérification du formulaire*************************/
 
-        //On enregistre les données du formulaire
-        var btnformulaire = document.querySelector('.cart__order__form');
-        btnformulaire.onclick = function() {
-          var contactObj = {
-            firstName : document.querySelector('#firstName').value,
-            lastName : document.querySelector('#lastName').value,
-            address : document.querySelector('#address').value,
-            city : document.querySelector('#city').value,
-            email : document.querySelector('#email').value
-          }
-          var formulaire = JSON.parse(localStorage.getItem("contact")[2]);
+//On enregistre les données du formulaire
+var btnformulaire = document.querySelector("#order");
+console.log(btnformulaire);
+btnformulaire.onclick = function() {
+  var firstName = document.querySelector('#firstName').value;
+  var lastName = document.querySelector('#lastName').value;
+  var address = document.querySelector('#address').value;
+  var city = document.querySelector('#city').value;
 
-            if (formulaire == null) {
-              var pErrorFirstNameMsg = document.querySelector("#firstNameErrorMsg");
-              var pErrorLastNameMsg = document.querySelector("#lastNameErrorMsg");
-              var pErrorAddressMsg = document.querySelector("#addressErrorMsg");
-              var pErrorCityMsg = document.querySelector("#cityErrorMsg");
+  //On vérifie le prénom
+  var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
+  var validFirstName = masqueChiffreCaractere.exec(firstName);
+  
+  //si "FirstName" contient une erreur, on affiche le message, sinon, non
+  if (firstName.indexOf(validFirstName)) {
+  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
+  }
 
-              pErrorFirstNameMsg.innerText = "Veuillez remplir le champ";
-              pErrorLastNameMsg.innerText = "Veuillez remplir le champ";
-              pErrorAddressMsg.innerText = "Veuillez remplir le champ";
-              pErrorCityMsg.innerText = "veuillez remplir le champ";
+  //On vérifie le Nom
+  var validLastName = masqueChiffreCaractere.exec(lastName);
+  if (lastName.indexOf(validLastName) >= 0) {
+  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
+  }
 
-              } else {
-                  //On vérifie le prénom
-                  var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
-                  var validFirstName = masqueChiffreCaractere.exec(contactObj.firstName);
-                  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
+  //On vérifie l'adresse
+  var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
+  var validAddress = masqueCaractere.exec(address);
+  if (address.indexOf(validAddress) >= 0) {
+  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
+  }
 
-                  //On vérifie le Nom
-                  var validLastName = masqueChiffreCaractere.exec(contactObj.lastName);
-                  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
-
-                  //On vérifie l'adresse
-                  var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
-                  var validAddress = masqueCaractere.exec(contactObj.address);
-                  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
-
-                  //On vérifie la ville
-                  var validCity = masqueChiffreCaractere.exec(contactObj.city);
-                  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
-                  }
-          localStorage.setItem("contact", JSON.stringify(formulaire));
-        }
+  //On vérifie la ville
+  var validCity = masqueChiffreCaractere.exec(city);
+  if (city.indexOf(validCity) >= 0) {
+  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
+  }
+            
+  var contactObj = {
+    firstName,
+    lastName,
+    address,
+    city
+  }
+}
