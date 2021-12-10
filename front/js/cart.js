@@ -105,45 +105,68 @@ panier.forEach(canapeLocal => {
 //On enregistre les données du formulaire
 var btnformulaire = document.querySelector("#order");
 btnformulaire.onclick = function() {
+
+  //On sélectionne l'input du prénom, du nom, de l'adresse, de la ville et de l'email
   var firstName = document.querySelector('#firstName').value;
   var lastName = document.querySelector('#lastName').value;
   var address = document.querySelector('#address').value;
   var city = document.querySelector('#city').value;
+  var email = document.querySelector('#email').value;
+
+  //On sélectionne les messages d'erreurs
+  var pErrorFirstNameMsg = document.querySelector('#firstNameErrorMsg');
+  var pErrorLastNameMsg = document.querySelector('#lastNameErrorMsg');
+  var pErrorAddressMsg = document.querySelector('#addressErrorMsg');
+  var pErrorCityMsg = document.querySelector('#cityErrorMsg');
+  var pErrorEmailMsg = document.querySelector('#emailErrorMsg');
+
+  //On crée des masques
+  var masqueChiffreCaractereFirstName = /^[a-zA-Z][-]+$/g;
+  var masqueChiffreCaractereLastName = /^[a-zA-Z][-]+$/g;
+  var masqueChiffreCaractereCity = /^[a-zA-Z][-]+$/g;
+  var masqueCaractereAddress = /^[a-zA-Z0-9][-]+$/g;
+  var masqueEmail = /[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+/;
 
   //On vérifie le prénom
-  var masqueChiffreCaractere = /[\d/][_!¡?÷?¿+=@#%&*\\(){}~<>;:[\]]/g;
-  var validFirstName = masqueChiffreCaractere.exec(firstName);
-
-  //si "FirstName" contient une erreur, on affiche le message, sinon, non
-  if (firstName.indexOf(validFirstName) >= 0) {
-  pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères : " + validFirstName[0];
+  if (masqueChiffreCaractereFirstName.test(firstName)) {
+    localStorage.setItem("contact", firstName);
+    return true;
+  } else {
+      pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits";
   }
 
   //On vérifie le Nom
-  var validLastName = masqueChiffreCaractere.exec(lastName);
-  if (lastName.indexOf(validLastName) >= 0) {
-  pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères : " + validLastName[0];
+  if (masqueChiffreCaractereLastName.test(lastName)) {
+    localStorage.setItem("contactN", lastName);
+    return true;
+  } else {
+      pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits";
   }
 
   //On vérifie l'adresse
-  var masqueCaractere = /[&~"#{[()\]}\\`_@°=+£¤%*µ,?;/:§!]/g;
-  var validAddress = masqueCaractere.exec(address);
-  if (address.indexOf(validAddress) >= 0) {
-  pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux : " + validAddress[0];
+  if (masqueCaractereAddress.test(address)) {
+    localStorage.setItem("contactA", address);
+    return true;
+  } else {
+      pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux";
   }
 
   //On vérifie la ville
-  var validCity = masqueChiffreCaractere.exec(city);
-  if (city.indexOf(validCity) >= 0) {
-  pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères : " + validCity[0];
+  if (masqueChiffreCaractereCity.test(city)) {
+    localStorage.setItem("contactC", city);
+    return true;
+  } else {
+      pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits";
   }
-            
-  var contactObj = {
-    firstName,
-    lastName,
-    address,
-    city
+
+  //On vérifie l'email
+  if (masqueEmail.test(email)) {
+    localStorage.setItem("contactE", email);
+    return true;
+  } else {
+      pErrorEmailMsg.innerText = "Votre Email n'est pas valide."
   }
+
 }
 
 //faire une methode post
