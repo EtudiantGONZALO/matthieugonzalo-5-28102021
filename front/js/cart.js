@@ -121,51 +121,67 @@ btnformulaire.onclick = function() {
   var pErrorEmailMsg = document.querySelector('#emailErrorMsg');
 
   //On crée des masques
-  var masqueChiffreCaractereFirstName = /^[a-zA-Z][-]+$/g;
-  var masqueChiffreCaractereLastName = /^[a-zA-Z][-]+$/g;
-  var masqueChiffreCaractereCity = /^[a-zA-Z][-]+$/g;
-  var masqueCaractereAddress = /^[a-zA-Z0-9][-]+$/g;
+  var masqueChiffreCaractereFirstName = /^[a-zA-Z-]+$/g;
+  var masqueChiffreCaractereLastName = /^[a-zA-Z-]+$/g;
+  var masqueChiffreCaractereCity = /^[a-zA-Z-]+$/g;
+  var masqueCaractereAddress = /^[a-zA-Z0-9-]+$/g;
   var masqueEmail = /[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+/;
+
 
   //On vérifie le prénom
   if (masqueChiffreCaractereFirstName.test(firstName)) {
-    localStorage.setItem("contact", firstName);
+    pErrorFirstNameMsg.innerText = "Votre prénom est bien écrit.";
     return true;
   } else {
       pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits";
-  }
+      btnformulaire_submit.type = "button";
+    }
 
   //On vérifie le Nom
   if (masqueChiffreCaractereLastName.test(lastName)) {
-    localStorage.setItem("contactN", lastName);
+    pErrorLastNameMsg.innerText = "Votre Nom est bien écrit.";
     return true;
   } else {
       pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits";
-  }
+      btnformulaire_submit.type = "button";
+    }
 
   //On vérifie l'adresse
   if (masqueCaractereAddress.test(address)) {
-    localStorage.setItem("contactA", address);
+    pErrorAddressMsg.innerText = "Votre adresse est bien écrite.";
     return true;
   } else {
       pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux";
-  }
+      btnformulaire_submit.type = "button";
+    }
 
   //On vérifie la ville
   if (masqueChiffreCaractereCity.test(city)) {
-    localStorage.setItem("contactC", city);
+    pErrorCityMsg.innerText = "Votre ville est bien écrite.";
     return true;
   } else {
       pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits";
-  }
+      btnformulaire_submit.type = "button";
+    }
 
   //On vérifie l'email
   if (masqueEmail.test(email)) {
-    localStorage.setItem("contactE", email);
+    pErrorEmailMsg.innerText = "Votre Email est valide."
     return true;
   } else {
       pErrorEmailMsg.innerText = "Votre Email n'est pas valide."
+      btnformulaire_submit.type = "button";
+    }
+  
+  var contact = {
+    firstName,
+    lastName,
+    address,
+    city,
+    email
   }
+
+  localStorage.setItem("contact", JSON.stringify([contact]));
 
 }
 
