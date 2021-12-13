@@ -48,9 +48,9 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
                 quantite: Number(quantity.value),
                 price: canape.price * Number(quantity.value),
             }
-            var panier = JSON.parse(localStorage.getItem("canapes"));
+            var panier = JSON.parse(localStorage.getItem("product-ID"));
             if (panier == null) {
-                localStorage.setItem("canapes", JSON.stringify([canapeObj]));
+                localStorage.setItem("product-ID", JSON.stringify([canapeObj]));
             } else {
                     var leCanapeExiste = false;
                     panier.forEach((canap) => {
@@ -63,7 +63,7 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
                     if (leCanapeExiste === false) {
                         panier.push(canapeObj);                
                     }
-                    localStorage.setItem("canapes", JSON.stringify(panier)); 
+                    localStorage.setItem("product-ID", JSON.stringify(panier)); 
                 }
             }
         })
