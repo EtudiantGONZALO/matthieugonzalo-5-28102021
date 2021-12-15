@@ -130,73 +130,47 @@ btnformulaire.onclick = function() {
 
   //On vérifie le prénom
   if (masqueChiffreCaractereFirstName.test(firstName)) {
-    pErrorFirstNameMsg.innerText = "Votre prénom est bien écrit.";
-    btnformulaire.type = "submit";
+    pErrorFirstNameMsg.innerText = "Votre prénom est bien écrit."
   } else {
       pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits";
-      btnformulaire.type = "button";
     }
 
   //On vérifie le Nom
   if (masqueChiffreCaractereLastName.test(lastName)) {
-    pErrorLastNameMsg.innerText = "Votre Nom est bien écrit.";
-    btnformulaire.type = "submit";
+    pErrorLastNameMsg.innerText = "Votre nom est bien écrit.";
   } else {
       pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits";
-      btnformulaire.type = "button";
     }
 
   //On vérifie l'adresse
   if (masqueCaractereAddress.test(address)) {
     pErrorAddressMsg.innerText = "Votre adresse est bien écrite.";
-    btnformulaire.type = "submit";
   } else {
       pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux";
-      btnformulaire.type = "button";
     }
 
   //On vérifie la ville
   if (masqueChiffreCaractereCity.test(city)) {
     pErrorCityMsg.innerText = "Votre ville est bien écrite.";
-    btnformulaire.type = "submit";
   } else {
       pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits";
-      btnformulaire.type = "button";
     }
 
   //On vérifie l'email
   if (masqueEmail.test(email)) {
-    pErrorEmailMsg.innerText = "Votre Email est valide.";
-    btnformulaire.type = "submit";
+    pErrorEmailMsg.innerText = "Votre email est valide.";
   } else {
       pErrorEmailMsg.innerText = "Votre Email n'est pas valide.";
-      btnformulaire.type = "button";
     }
+
 
   var contact = {
     firstName,
     lastName,
     address,
     city,
-    email
+    email,
   }
-
+  
   localStorage.setItem("contact", JSON.stringify(contact));
 }
-/*
-//Faire une requete post
-function postForm() {
-  const options = {
-    method: 'POST',
-    body: JSON.stringify(contact, panier),
-    headers: { 
-      'Content-Type': 'application/json',
-    }
-  };
-
-  fetch("http://localhost:3000/api/products/order", options)
-    .then(response => response.json())
-    .then(data => {
-      localStorage.setItem('orderId', data.orderId);
-    });
-  }*/
