@@ -78,7 +78,7 @@ panier.forEach(canapeLocal => {
           //nouveau tableau dans le localStorage 
           canapeLocal.quantite = Number(input.value);
           canapeLocal.price = Number(canapeApi.price) * Number(canapeLocal.quantite);
-          localStorage.setItem("canapes", JSON.stringify(panier));
+          localStorage.setItem("product-ID", JSON.stringify(panier));
           window.location.href = "cart.html";
         });
                 
@@ -87,7 +87,7 @@ panier.forEach(canapeLocal => {
           var deleteId = canapeLocal.id;
           var deleteColor = canapeLocal.color;
           panier = panier.filter( elt => elt.id !== deleteId || elt.color !== deleteColor);
-          localStorage.setItem("canapes", JSON.stringify(panier));
+          localStorage.setItem("product-ID", JSON.stringify(panier));
           window.location.href = "cart.html";
         });
 
