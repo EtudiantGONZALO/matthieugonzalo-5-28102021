@@ -2,7 +2,6 @@
 const queryString_url_id = window.location.search;
 
 const leId = queryString_url_id.slice(4);
-console.log(leId);
 
 // appeler l'api avec la route /get 1 canape de l'api
 fetch("http://localhost:3000/api/products" + "/" + leId)
@@ -12,7 +11,6 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         }
     })
     .then(function(canape) {
-        console.log(canape);
 
         //on crée l'image du produit sélectionné
         var div = document.querySelector(".item__img");        
@@ -42,17 +40,26 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
         //On met le localStorage au button
         var buttonPrincipal = document.querySelector("#addToCart");
         buttonPrincipal.onclick = function() {
+
+            //On crée un objet canapeObj
             var canapeObj = {
                 id: canape._id,
                 color: colors.value,
                 quantite: Number(quantity.value),
                 price: canape.price * Number(quantity.value),
             }
+
+            //On crée une variable dans le localStorage
             var panier = JSON.parse(localStorage.getItem("product-ID"));
+
+            //Si le panier est vide on crée le panier
             if (panier == null) {
                 localStorage.setItem("product-ID", JSON.stringify([canapeObj]));
             } else {
                     var leCanapeExiste = false;
+
+                    //Si le canape existe avec le meme id et la meme couleur
+                    //On augmente sa quantité
                     panier.forEach((canap) => {
                         if (canap.id === canapeObj.id && canap.color === canapeObj.color) {
                             canap.quantite += canapeObj.quantite;
@@ -60,6 +67,8 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
                             leCanapeExiste = true;                                                      
                         }
                     });
+
+                    //Si le canape n'existe pas on l'ajoute au localStorage
                     if (leCanapeExiste === false) {
                         panier.push(canapeObj);                
                     }

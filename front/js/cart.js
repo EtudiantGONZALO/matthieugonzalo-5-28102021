@@ -1,5 +1,7 @@
+//On déclare une variable panier du localStorage avec un tableau des produits
 var panier = JSON.parse(localStorage.getItem("product-ID"));
-console.log(panier);
+
+//On récupère le panier que l'on détail
 panier.forEach(canapeLocal => {
   fetch("http://localhost:3000/api/products" + "/" + canapeLocal.id)
   .then(function(res) {
@@ -8,7 +10,7 @@ panier.forEach(canapeLocal => {
       }
     })
   .then(function(canapeApi) {
-      console.log(canapeApi);
+      
         //Création de la présentation du produit dans le panier
         var section = document.querySelector("#cart__items");
 
@@ -60,7 +62,7 @@ panier.forEach(canapeLocal => {
         
         //On crée le bouton supprimer
         var divSupprimer = document.createElement("div");
-        divSupprimer.classList.add("cart__item__content__settings__delete")
+        divSupprimer.classList.add("cart__item__content__settings__delete");
         divQuantite.appendChild(divSupprimer);
         var pSupprimer = document.createElement("p");
         pSupprimer.classList.add("deleteItem");
@@ -89,11 +91,7 @@ panier.forEach(canapeLocal => {
           panier = panier.filter( elt => elt.id !== deleteId || elt.color !== deleteColor);
           localStorage.setItem("product-ID", JSON.stringify(panier));
           window.location.href = "cart.html";
-        });
-
-        
-
-        
+        });        
   })
   .catch(function(err) {
   // Une erreur est survenue
@@ -121,39 +119,39 @@ btnformulaire.onclick = function() {
   var pErrorEmailMsg = document.querySelector('#emailErrorMsg');
 
   //On crée des masques
-  var masqueChiffreCaractereFirstName = /^[a-zA-Z- ]+$/g;
-  var masqueChiffreCaractereLastName = /^[a-zA-Z- ]+$/g;
-  var masqueChiffreCaractereCity = /^[a-zA-Z- ]+$/g;
-  var masqueCaractereAddress = /^[a-zA-Z0-9- ]+$/g;
+  var masqueChiffreCaractereFirstName = /^[a-zA-Z- ']+$/g;
+  var masqueChiffreCaractereLastName = /^[a-zA-Z- ']+$/g;
+  var masqueChiffreCaractereCity = /^[a-zA-Z- ']+$/g;
+  var masqueCaractereAddress = /^[a-zA-Z0-9- ']+$/g;
   var masqueEmail = /[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+/;
 
 
   //On vérifie le prénom
   if (masqueChiffreCaractereFirstName.test(firstName)) {
-    pErrorFirstNameMsg.innerText = "Votre prénom est bien écrit."
+    pErrorFirstNameMsg.innerText = "Votre prénom est bien écrit.";
   } else {
-      pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits";
+      pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits.";
     }
 
   //On vérifie le Nom
   if (masqueChiffreCaractereLastName.test(lastName)) {
     pErrorLastNameMsg.innerText = "Votre nom est bien écrit.";
   } else {
-      pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits";
+      pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits.";
     }
 
   //On vérifie l'adresse
   if (masqueCaractereAddress.test(address)) {
     pErrorAddressMsg.innerText = "Votre adresse est bien écrite.";
   } else {
-      pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux";
+      pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux.";
     }
 
   //On vérifie la ville
   if (masqueChiffreCaractereCity.test(city)) {
     pErrorCityMsg.innerText = "Votre ville est bien écrite.";
   } else {
-      pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits";
+      pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits.";
     }
 
   //On vérifie l'email
@@ -163,14 +161,15 @@ btnformulaire.onclick = function() {
       pErrorEmailMsg.innerText = "Votre Email n'est pas valide.";
     }
 
-
-  var contact = {
-    firstName,
-    lastName,
-    address,
-    city,
-    email,
-  }
-  
-  localStorage.setItem("contact", JSON.stringify(contact));
+    //On crée un objet contact
+    var contact = {
+      firstName,
+      lastName,
+      address,
+      city,
+      email,
+    }
+    
+    //On enregistre l'objet contact dans le localStorage
+    localStorage.setItem("contact", JSON.stringify(contact));
 }
