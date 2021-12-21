@@ -1,39 +1,38 @@
 //récupération dans une variable l'id passé en parametre de l'url
 const queryString_url_id = window.location.search;
 
-const leId = queryString_url_id.slice(4);
+const idPrimaire = queryString_url_id.slice(4);
 
 // appeler l'api avec la route /get 1 canape de l'api
-fetch("http://localhost:3000/api/products" + "/" + leId)
+fetch("http://localhost:3000/api/products" + "/" + idPrimaire)
     .then(function(res) {
         if (res.ok) {
         return res.json();
         }
     })
-    .then(function(canape) {
+    .then(function(product) {
 
         //on crée l'image du produit sélectionné
         var div = document.querySelector(".item__img");        
         var img = document.createElement("img");
-        img.src = canape.imageUrl;
-        img.alt = canape.altTxt;
+        img.src = product.imageUrl;
+        img.alt = product.altTxt;
         div.appendChild(img);
 
         //On applique le titre, le prix et la description
         var h1 = document.querySelector("#title");
-        h1.innerText = canape.name;
+        h1.innerText = product.name;
         var span = document.querySelector("#price");
-        span.innerText = canape.price;
+        span.innerText = product.price;
         var p = document.querySelector("#description");
-        p.innerText = canape.description;
+        p.innerText = product.description;
 
         //A partir du data on renvoie une boucle pour chaque couleurs
-        var selectionColors = document.querySelector("#colors");
-        canape.colors.forEach(canapcolor => { 
-            console.log(canapcolor);         
+        product.colors.forEach(productColor => { 
+            var selectionColors = document.querySelector("#colors");
             var options =  document.createElement("option");
-            options.value = canapcolor;
-            options.innerText = canapcolor; 
+            options.value = productColor;
+            options.innerText = productColor; 
             selectionColors.appendChild(options);
         });
 
@@ -43,10 +42,10 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
 
             //On crée un objet canapeObj
             var canapeObj = {
-                id: canape._id,
+                id: product._id,
                 color: colors.value,
                 quantite: Number(quantity.value),
-                price: canape.price * Number(quantity.value),
+                price: product.price * Number(quantity.value),
             }
 
             //On crée une variable dans le localStorage
@@ -63,7 +62,7 @@ fetch("http://localhost:3000/api/products" + "/" + leId)
                     panier.forEach((canap) => {
                         if (canap.id === canapeObj.id && canap.color === canapeObj.color) {
                             canap.quantite += canapeObj.quantite;
-                            canap.price = canap.quantite * canape.price;
+                            canap.price = canap.quantite * product.price;
                             leCanapeExiste = true;                                                      
                         }
                     });

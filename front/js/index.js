@@ -7,16 +7,17 @@ fetch("http://localhost:3000/api/products")
   })
   .then(function(canapes) {
 
-    //Déclaration de la variable section qui renvoie à l'id "items"
-    var section = document.querySelector(".items");
-
     //A partir du data on renvoie une boucle de chaque canapé
     canapes.forEach(canape => {
 
-      //On crée une balise <a> et une balise <article> que l'on apparente
+      //Déclaration de la variable section qui renvoie à l'id "items"
+      var section = document.querySelector("#items");
+
+      //On crée une balise <a> et une balise <article> que l'on apparente et l'on apparente <a> a section
       var canapeA = document.createElement("a");
       var article = document.createElement("article");
       canapeA.appendChild(article);
+      section.appendChild(canapeA);
 
       //On affecte au href de la balise <a> un lien
       canapeA.href = './product.html' + '?id=' + canape._id;
@@ -35,8 +36,7 @@ fetch("http://localhost:3000/api/products")
       //On apparente chaque balise a son element parent
       article.appendChild(img);
       article.appendChild(h3);
-      article.appendChild(p);
-      section.appendChild(canapeA);     
+      article.appendChild(p);     
     });
   })
   .catch(function(err) {
