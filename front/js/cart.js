@@ -171,5 +171,48 @@ btnformulaire.onclick = function() {
     }
     
     //On enregistre l'objet contact dans le localStorage
-    localStorage.setItem("contact", JSON.stringify(contact));
+    //localStorage.setItem("contact", JSON.stringify(contact));
+
+    //On cré la variable de l'option (method: POST)
+    var productsLocalStorage = JSON.parse(localStorage.getItem("product-ID"));
+    
+    //pour chaque objet du tableau productsLocalStorage, 
+    //je récupère l'id et je l'ajoute dans le tableau products
+    var products = [];
+    productsLocalStorage.forEach(element => {
+      products.push(element.id);
+    });
+    //Appeler l'API /order (comme ce que tu as fait dans confirmation.js)
+    const orderPost = {
+      products,
+      contact,
+    }
+    
+    //Constante options de la methode post
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(orderPost),
+      headers: {
+          'Accept': 'application/json', 
+          "Content-Type": "application/json", 
+      },
+    };
+    
+    //On interroge l'api avec la methode post
+    fetch("http://localhost:3000/api/products" + "/order", options)
+      .then((response) => response.json())
+
+      .then((data) => {
+        //On redirige vers la page de confirmation.html avec l'orderId de la methode POST
+        document.location.href = '../html/confirmation.html' + '?id=' + data.orderId;
+      
+        //On efface le localStorage
+        localStorage.clear();
+      })
+
+      .catch(function(err) {
+        // Une erreur est survenue
+      });
+      
+// On referme le onclick
 }
