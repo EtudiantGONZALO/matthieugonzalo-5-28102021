@@ -126,41 +126,14 @@ btnformulaire.onclick = function() {
   var masqueEmail = /[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+/;
 
 
-  //On vérifie le prénom
-  if (masqueChiffreCaractereFirstName.test(firstName)) {
+  
+
+  if (masqueChiffreCaractereFirstName.test(firstName) && masqueChiffreCaractereLastName.test(lastName) && masqueCaractereAddress.test(address) && masqueChiffreCaractereCity.test(city) && masqueEmail.test(email)) {
     pErrorFirstNameMsg.innerText = "Votre prénom est bien écrit.";
-  } else {
-      pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits.";
-    }
-
-  //On vérifie le Nom
-  if (masqueChiffreCaractereLastName.test(lastName)) {
     pErrorLastNameMsg.innerText = "Votre nom est bien écrit.";
-  } else {
-      pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits.";
-    }
-
-  //On vérifie l'adresse
-  if (masqueCaractereAddress.test(address)) {
     pErrorAddressMsg.innerText = "Votre adresse est bien écrite.";
-  } else {
-      pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux.";
-    }
-
-  //On vérifie la ville
-  if (masqueChiffreCaractereCity.test(city)) {
     pErrorCityMsg.innerText = "Votre ville est bien écrite.";
-  } else {
-      pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits.";
-    }
-
-  //On vérifie l'email
-  if (masqueEmail.test(email)) {
     pErrorEmailMsg.innerText = "Votre email est valide.";
-  } else {
-      pErrorEmailMsg.innerText = "Votre Email n'est pas valide.";
-    }
-
     //On crée un objet contact
     var contact = {
       firstName,
@@ -169,7 +142,7 @@ btnformulaire.onclick = function() {
       city,
       email,
     }
-    
+
     //On enregistre l'objet contact dans le localStorage
     //localStorage.setItem("contact", JSON.stringify(contact));
 
@@ -213,6 +186,13 @@ btnformulaire.onclick = function() {
       .catch(function(err) {
         // Une erreur est survenue
       });
-      
+  } else {
+    pErrorFirstNameMsg.innerText = "Votre prénom ne doit pas contenir de caractères interdits.";
+    pErrorLastNameMsg.innerText = "Votre Nom ne doit pas contenir de caractères interdits.";
+    pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux.";
+    pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits.";
+    pErrorEmailMsg.innerText = "Votre Email n'est pas valide.";
+  }
+  
 // On referme le onclick
 }
