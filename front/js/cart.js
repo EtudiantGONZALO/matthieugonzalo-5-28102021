@@ -178,9 +178,6 @@ btnformulaire.onclick = function() {
       .then((data) => {
         //On redirige vers la page de confirmation.html avec l'orderId de la methode POST
         document.location.href = '../html/confirmation.html' + '?id=' + data.orderId;
-      
-        //On efface le localStorage
-        localStorage.clear();
       })
 
       .catch(function(err) {
