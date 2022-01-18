@@ -189,6 +189,7 @@ btnformulaire.onclick = function() {
     pErrorAddressMsg.innerText = "Votre adresse ne doit pas contenir de caratères spéciaux.";
     pErrorCityMsg.innerText = "Votre ville ne doit pas contenir de caractères interdits.";
     pErrorEmailMsg.innerText = "Votre Email n'est pas valide.";
+    return false;
   }
   
 // On referme le onclick
